@@ -72,6 +72,7 @@ int main() {
     
     generateColorCodeReferenceManual();
     int result = printColorMap();
+    assert(result == 25);
     testColorMap();
     printf("All is well (maybe!)\n");
     return 0;
