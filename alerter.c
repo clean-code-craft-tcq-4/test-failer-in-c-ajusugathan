@@ -36,29 +36,31 @@ void alertInCelcius(float farenheit,int (*functionPointerToNetworkAlert)(float))
 }
 
 int main() {
+	
     alertInCelcius(420.5,&networkAlertStub);
-	assert(215 ==(int)convertFarenheitToCelcius(420.5));
-	assert(alertFailureCount == 1);
+    assert(215 ==(int)FarenheitToCelciusConversion(420.5));
+    assert(alertFailureCount == 1);
 	
     alertInCelcius(300,&networkAlertStub);
-	assert(148==(int)convertFarenheitToCelcius(300));
-	assert(alertFailureCount == 1);
+    assert(148==(int)FarenheitToCelciusConversion(300));
+    assert(alertFailureCount == 1);
 	
-	alertInCelcius(550,&networkAlertStub);
-	assert(287==(int)convertFarenheitToCelcius(550));
-	assert(alertFailureCount == 2);
+    alertInCelcius(550,&networkAlertStub);
+    assert(287==(int)FarenheitToCelciusConversion(550));
+    assert(alertFailureCount == 2);
 	
-	alertInCelcius(200,&networkAlertStub);
-	assert(93==(int)convertFarenheitToCelcius(200));
-	assert(alertFailureCount == 2);
+    alertInCelcius(200,&networkAlertStub);
+    assert(93==(int)FarenheitToCelciusConversion(200));
+    assert(alertFailureCount == 2);
 	
-	alertInCelcius(250,&networkAlertStub);
-	assert(121==(int)convertFarenheitToCelcius(250));
-	assert(alertFailureCount == 2);
+    alertInCelcius(250,&networkAlertStub);
+    assert(121==(int)FarenheitToCelciusConversion(250));
+    assert(alertFailureCount == 2);
 	
-	alertInCelcius(600,&convertFarenheitToCelcius,&networkAlertStub);
-	assert(315==(int)convertFarenheitToCelcius(600));
-	assert(alertFailureCount == 3);
+    alertInCelcius(600,&networkAlertStub);
+    assert(315==(int)FarenheitToCelciusConversion(600));
+    assert(alertFailureCount == 3);
+	
     printf("%d alerts failed.\n", alertFailureCount);
     printf("All is well (maybe!)\n");
     return 0;
