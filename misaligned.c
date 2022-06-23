@@ -9,6 +9,7 @@ const char* MinorColorNames[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
 int numberOfMajorColors = sizeof(MajorColorNames) / sizeof(MajorColorNames[0]);
 
 int numberOfMinorColors = sizeof(MinorColorNames) / sizeof(MinorColorNames[0]);
+int maxCombination =(numberOfMajorColors*numberOfMinorColors);
 
 typedef struct 
 {
@@ -37,9 +38,9 @@ void generateColorCodeReferenceManual(void)
     {
         for(MinorColorCount = 0; MinorColorCount < numberOfMinorColors; MinorColorCount++)
         {
-            colorCodeReferenceManual[MajorColorCount*5+MinorColorCount].pairNumber = PairNumber;
-            strcpy(colorCodeReferenceManual[MajorColorCount*5+MinorColorCount].majorColorName , MajorColorNames[MajorColorCount]);
-            strcpy(colorCodeReferenceManual[MajorColorCount*5+MinorColorCount].minorColorName , MinorColorNames[MinorColorCount]);
+            colorCodeReferenceManual[MajorColorCount*numberOfMajorColors+MinorColorCount].pairNumber = PairNumber;
+            strcpy(colorCodeReferenceManual[MajorColorCount*numberOfMajorColors+MinorColorCount].majorColorName , MajorColorNames[MajorColorCount]);
+            strcpy(colorCodeReferenceManual[MajorColorCount*numberOfMajorColors+MinorColorCount].minorColorName , MinorColorNames[MinorColorCount]);
             PairNumber++;
         }
     }
@@ -60,7 +61,8 @@ int printColorMap() {
 
 void testColorMap()
 {
-    for(int colorMapCount=0;colorMapCount<25;colorMapCount++)
+    generateColorCodeReferenceManual();
+    for(int colorMapCount=0;colorMapCount<maxCombination;colorMapCount++)
     {
         assert(colorCodeReferenceManual[colorMapCount].pairNumber == colorPairMap[colorMapCount].pairNumber);
         assert(strcmp(colorCodeReferenceManual[colorMapCount].majorColorName,colorPairMap[colorMapCount].majorColorName) == 0);
@@ -70,9 +72,8 @@ void testColorMap()
 
 int main() {
     
-    generateColorCodeReferenceManual();
     int result = printColorMap();
-    assert(result == 25);
+    assert(result == maxCombination);
     testColorMap();
     printf("All is well (maybe!)\n");
     return 0;
