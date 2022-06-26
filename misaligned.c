@@ -73,6 +73,7 @@ int main()
 {
     int result = printColorMap();
     generateColorCodeReferenceManual();
+    assert(result == MAX_COLOR_PAIR);
     for(int combination_count=0;combination_count<MAX_COLOR_PAIR;combination_count++)
     {
        assert(strcmp(&ColorCodeReferenceManual[combination_count][0],&colorMapInfo[combination_count][0])==0);
