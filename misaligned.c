@@ -75,7 +75,7 @@ int main()
     generateColorCodeReferenceManual();
     for(int combination_count=0;combination_count<MAX_COLOR_PAIR;combination_count++)
     {
-       assert(strcmp(&ColorCodeReferenceManual[combination_count][0],colorMapInfo[combination_count][0])==0);
+       assert(strcmp(&ColorCodeReferenceManual[combination_count][0],&colorMapInfo[combination_count][0])==0);
        
     }
     printf("All is well (maybe!)\n");
