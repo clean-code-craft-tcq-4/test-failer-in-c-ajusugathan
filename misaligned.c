@@ -2,10 +2,6 @@
 #include <assert.h>
 #include <string.h>
 
-#include <stdio.h>
-#include <assert.h>
-#include <string.h>
-
 #define MAX_COLOR_PAIR 25
 
 const char* MajorColorNames[] = {"White", "Red", "Black", "Yellow", "Violet"};
