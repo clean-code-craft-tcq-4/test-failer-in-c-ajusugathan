@@ -24,16 +24,14 @@ int getColorMap()
 {
     int majorColorIndex;
     int minorColorIndex;
-	char ColorMapRow[100];
-	int pair=0;
+    char ColorMapRow[100];
     for(majorColorIndex=0; majorColorIndex < numberOfMajorColors; majorColorIndex++)
     {
         for(minorColorIndex=0; minorColorIndex < numberOfMinorColors; minorColorIndex++)
         {
             sprintf(ColorMapRow, "%d\t|%s\t\t|%s\n",(getPairNumber(majorColorIndex,minorColorIndex)),(MajorColorNames[majorColorIndex]),(MinorColorNames[minorColorIndex]));
             strcpy(&colorMapInfo[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0],ColorMapRow);
-			printf("%s",&colorMapInfo[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0]);
-			pair++;
+	    printf("%s",&colorMapInfo[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0]);
         }
     }
     return(majorColorIndex*minorColorIndex);
@@ -50,31 +48,32 @@ int printColorMap()
 void generateColorCodeReferenceManual()
 {
     int pairNumber = 1;
-	char ColorMapRow[100];
-	printf("\n Actual Color Code Refernece Manual\n\n");
+    char ColorMapRow[100];
     for(int majorColorIndex=0; majorColorIndex < numberOfMajorColors; majorColorIndex++)
     {
         for(int minorColorIndex=0; minorColorIndex < numberOfMinorColors; minorColorIndex++)
         {
             sprintf(ColorMapRow, "%d\t|%s\t\t|%s\n",pairNumber++,(MajorColorNames[majorColorIndex]),(MinorColorNames[minorColorIndex]));
-			strcpy(&ColorCodeReferenceManual[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0],ColorMapRow);
-            printf("%s",&ColorCodeReferenceManual[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0]);
+	    strcpy(&ColorCodeReferenceManual[(majorColorIndex * numberOfMajorColors + minorColorIndex)][0],ColorMapRow);
         }
     }
     
 }
-
-
-int main() 
+void test_verifyGeneratedColorMap()
 {
-    int result = printColorMap();
     generateColorCodeReferenceManual();
-    assert(result == MAX_COLOR_PAIR);
     for(int combination_count=0;combination_count<MAX_COLOR_PAIR;combination_count++)
     {
        assert(strcmp(&ColorCodeReferenceManual[combination_count][0],&colorMapInfo[combination_count][0])==0);
        
     }
+}
+
+int main() 
+{
+    int result = printColorMap();
+    assert(result == MAX_COLOR_PAIR);
+    test_verifyGeneratedColorMap();
     printf("All is well (maybe!)\n");
     return 0;
 }
